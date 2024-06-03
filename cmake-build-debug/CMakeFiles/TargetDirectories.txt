@@ -1,0 +1,3 @@
+/home/luinux/Desktop/views_project/cmake-build-debug/CMakeFiles/views_project.dir
+/home/luinux/Desktop/views_project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/luinux/Desktop/views_project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
