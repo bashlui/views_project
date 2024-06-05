@@ -3,7 +3,8 @@
 
     Project: Views - Plataforma de streaming de videos
     Created by: Luis Antonio Bolaina Domínguez, Freda Nicole Blanco
-    
+    Los ratings van a ser del 1 al 10
+    Mínimo que sean 10 películas
 
 
 */
@@ -18,12 +19,7 @@
 using namespace std;
 
 void showMovies() {
-    ifstream inFile;
 
-    inFile.open("./Data/Peliculas.txt");
-    for (string line; getline(inFile, line);) {
-        cout << line << endl;
-    }
 }
 
 void home(){

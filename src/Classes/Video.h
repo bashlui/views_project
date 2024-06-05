@@ -4,21 +4,26 @@
 
 class Video {
     protected:
-        int videoId;
-        std::string videoName;
-        int videoLength;
-        std::string videoGenre;
-        float videoRating;
-
-    public:
         Video();
-        Video(int, std::string, int, std::string, float);
-        virtual void display();
-        virtual void getVideoId() = 0;
-        virtual void getVideoName() = 0;
-        virtual void getVideoLength() = 0;
-        virtual void getVideoGenre() = 0;
-        virtual void getVideoRating() = 0;
+        int id;
+        std::string title;
+        std::string genre;
+        std::string duration;
+        double rating;
+    public:
+        Video(int&, std::string&, std::string&, std::string&, double&);
+        virtual void setId() = 0;
+        virtual void setTitle() = 0;
+        virtual void setDuration() = 0;
+        virtual void setGenre() = 0;
+        virtual void setRating() = 0;
+
+        int getId() const;
+        std::string getTitle() const;
+        std::string getGenre() const;
+        std::string getDuration() const;
+        double getRating() const;
+        virtual void display() = 0;
 };
 
 # endif // VIDEO_H
