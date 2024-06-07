@@ -1,91 +1,144 @@
-/* 
-
-
+/*
     Project: Views - Plataforma de streaming de videos
     Created by: Luis Antonio Bolaina Domínguez, Freda Nicole Blanco
     Los ratings van a ser del 1 al 10
     Mínimo que sean 10 películas
-
-
 */
 
 # include <iostream>
 # include <vector>
 # include <string>
 # include <algorithm>
-# include <random>
 # include <fstream>
+# include <sstream>
+# include "Classes/Video.h"
 
 using namespace std;
 
-void showMovies() {
+string trim(const string &str) {
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first) {
+        return "";
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
 
+void showMoviesByRate() {
+    ifstream file("Data/Peliculas.txt");
+    if(!file.is_open()){
+        cout << "Error al abrir el archivo" << endl;
+        return;
+    }
+
+    vector<Video> videos;
+    string line;
+
+    while(getline(file, line)) {
+        stringstream ss(line);
+        string ignore, title, genre, duration, rating;
+        int movieRate;
+
+        if (getline(ss, ignore, ',') &&
+        getline(ss, title, ',') &&
+        getline(ss, duration, ',') &&
+        getline(ss, genre, ',') &&
+        getline(ss, rating, ',')) {
+
+            title = trim(title);
+            genre = trim(genre);
+            duration = trim(duration);
+            rating = trim(rating);
+
+            try {
+                movieRate = stoi(rating);
+                Video video(title, genre, duration, movieRate);
+                videos.push_back(video);
+            } catch (const invalid_argument &e) {
+                cout << "Error al convertir el rating a entero: " << title << endl;
+                continue;
+            }
+        } else {
+            cout << "Error al leer la línea: " << line << endl;
+            continue;
+        }
+    }
+    for (const Video &video : videos) {
+        cout << "Títle: " << video.getTitle() << endl;
+        cout << "Genre: " << video.getGenre() << endl;
+        cout << "Duration: " << video.getDuration() << endl;
+        cout << "Rating: " << video.getRating() << endl;
+        cout << "--------------------------------" << endl;
+    }
 }
 
 void home(){
-    int opt;
-    string temp = "";
     string red = "\033[31m";
+    string yellow = "\033[33m";
     string reset = "\033[0m";
 
     cout <<red <<R"(
 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
- ░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
- ░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░  
-  ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░ 
-  ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░ 
-   ░▒▓██▓▒░  ░▒▓█▓▒░▒▓████████▓▒░░▒▓█████████████▓▒░░▒▓███████▓▒░  
+                ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓███████▓▒░
+                ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                 ░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                 ░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░ ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░
+                  ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░
+                  ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░
+                   ░▒▓██▓▒░  ░▒▓█▓▒░▒▓████████▓▒░░▒▓█████████████▓▒░░▒▓███████▓▒░
                                                                                                                 
 )"<<reset << '\n' << endl;
-
-    cout << red;
-    cout << "Bienvenido a \"Views\", la plataforma de streaming de videos más grande de la historia." << endl;
-    cout << "Contamos con los siguientes servicios, seleccione uno por favor: " << endl;
-    cout << "1. Ver la lista de películas" << endl;
-    cout << "2. Ver la lista de series" << endl;
-    cout << "3. Calificación de las películas y series" << endl;
-    cout << "4. Calificar una película o serie" << endl;
-    cout << "0. Salir" << endl;
-    cout << reset;
-
+    cout << "Welcome to \"Views\", the largest video streaming platform in history." << endl;
+    cout << "We offer the following services, please select one: " << endl;
+    int option;
     do {
-        getline(cin, temp);
-        opt = stoi(temp);
-
-        switch (opt) {
+        cout << red;
+        cout << "1. View the list of movies" << endl;
+        cout << "2. View the list of series" << endl;
+        cout << "3. Ratings of movies and series" << endl;
+        cout << "4. Rate a movie or series" << endl;
+        cout << "0. Exit" << endl;
+        cout << reset;
+        cin >> option;
+        switch (option) {
             case 1:
-                cout << "Lista de películas" << endl;
-                showMovies();
+                cout << "TEST" << endl;
                 break;
             case 2:
-                cout << "Lista de series" << endl;
+                cout << "TEST2" << endl;
                 break;
             case 3:
-                cout << "Calificación de las películas y series" << endl;
+                cout << yellow << R"(
+        ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓████████▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓███████▓▒░▒▓████████▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒▒▓█▓▒░░▒▓█▓▒░▒▓██████▓▒░        ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░   ░▒▓█▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░
+        ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░   ░▒▓██▓▒░  ░▒▓█▓▒░▒▓████████▓▒░      ░▒▓████████▓▒░▒▓█▓▒░▒▓███████▓▒░   ░▒▓█▓▒░
+                )" << reset << endl;
+                showMoviesByRate();
                 break;
             case 4:
-                cout << "Calificar una película o serie" << endl;
+                cout << "TEST4" << endl;
                 break;
             case 0:
-                cout << "Gracias por usar \"Views\", esperamos que vuelvas pronto." << endl;
+                cout << yellow << R"(
+                     ░▒▓███████▓▒░▒▓████████▓▒░▒▓████████▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░
+                    ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                    ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                     ░▒▓██████▓▒░░▒▓██████▓▒░ ░▒▓██████▓▒░         ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░
+                           ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░                ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                           ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░                ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░
+                    ░▒▓███████▓▒░░▒▓████████▓▒░▒▓████████▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░
+                )" << reset << endl;
                 break;
             default:
                 cout << "Opción no válida, por favor seleccione una opción válida." << endl;
                 break;
         }
-    } while (opt != 0);
+    } while (option != 0);
 }
-
-
-string returnLineCin() {
-    string line;
-    getline(cin, line);
-    return line;
-}
-
-
 
 int main() {
     home();

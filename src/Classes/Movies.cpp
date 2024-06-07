@@ -15,6 +15,3 @@ std::string Movies::getMovieReleaseDate() {
     return releaseDate;
 }
 
-void display(){
-
-}

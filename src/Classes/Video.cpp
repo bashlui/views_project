@@ -1,25 +1,21 @@
-# include "Video.h"
 # include <iostream>
-# include <string>
+# include <fstream>
+# include <vector>
+
+# include "Video.h"
 
 Video::Video(){
-    id = 0;
     title = "";
     genre = "";
     duration = "";
     rating = 0.0;
 }
 
-Video::Video(int &_id, std::string &_title, std::string &_genre, std::string &_duration, double &_rating){
-    id = _id;
-    title = _title;
-    genre = _genre;
-    duration = _duration;
-    rating = _rating;
-}
-
-int Video::getId() const{
-    return id;
+Video::Video(std::string &_title, std::string &_genre, std::string &_duration, int &_rating){
+    this->title = _title;
+    this->genre = _genre;
+    this->duration = _duration;
+    this->rating = _rating;
 }
 
 std::string Video::getTitle() const{
@@ -34,10 +30,8 @@ std::string Video::getDuration() const{
     return duration;
 }
 
-double Video::getRating() const{
+int Video::getRating() const{
     return rating;
 }
 
-void display(){
 
-}

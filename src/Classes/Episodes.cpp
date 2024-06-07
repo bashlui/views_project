@@ -1,14 +1,20 @@
 # include "Episodes.h"
 
-Episodes::Episodes(int& id, std::string& title, std::string& genre, std::string& duration, float& rating, std::string& season, std::string& episode) : Video(id, title, genre, duration, rating) {
-    this->season = season;
-    this->episode = episode;
+Episodes::Episodes() : Video() {
+    seasonEpisode = "";
+    airDate = "";
 }
 
-std::string Episodes::getSeason() {
-    return season;
+Episodes::Episodes(int &_id, std::string &_title, std::string &_genre, std::string &_duration, double &_rating, std::string &_seasonEpisode, std::string &_airDate) : Video(_id, _title, _genre, _duration, _rating) {
+    this->seasonEpisode = _seasonEpisode;
+    this->airDate = _airDate;
 }
 
-std::string Episodes::getEpisode() {
-    return episode;
+std::string Episodes::getSeasonEpisode() {
+    return seasonEpisode;
 }
+
+
+
+
+

@@ -1,29 +1,23 @@
 # ifndef VIDEO_H
 # define VIDEO_H
+# include <vector>
 # include <string>
 
 class Video {
     protected:
-        Video();
-        int id;
         std::string title;
         std::string genre;
         std::string duration;
-        double rating;
+        int rating;
     public:
-        Video(int&, std::string&, std::string&, std::string&, double&);
-        virtual void setId() = 0;
-        virtual void setTitle() = 0;
-        virtual void setDuration() = 0;
-        virtual void setGenre() = 0;
-        virtual void setRating() = 0;
-
-        int getId() const;
+        Video();
+        Video(std::string&, std::string&, std::string&, int&);
         std::string getTitle() const;
         std::string getGenre() const;
         std::string getDuration() const;
-        double getRating() const;
-        virtual void display() = 0;
+        int getRating() const;
+        //std::vector<Video> showMovieByGenre(std::string genre, const std::vector<Video> &videos);
+        //static void showEpisodeBySeries(std::string title, const std::vector<Video> &videos);
 };
 
 # endif // VIDEO_H
