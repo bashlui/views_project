@@ -12,67 +12,25 @@
 # include <fstream>
 # include <sstream>
 # include "Classes/Video.h"
+# include "Classes/Movies.h"
 
 using namespace std;
 
-string trim(const string &str) {
-    size_t first = str.find_first_not_of(' ');
-    if (string::npos == first) {
-        return "";
-    }
-    size_t last = str.find_last_not_of(' ');
-    return str.substr(first, (last - first + 1));
+vector<Video> movies;
+vector<Video> moviesByRating;
+
+void showMovieList() {
+  Movies movieInstance;
+  movieInstance.showMovieList(movies);
 }
 
-void showMoviesByRate() {
-    ifstream file("Data/Peliculas.txt");
-    if(!file.is_open()){
-        cout << "Error al abrir el archivo" << endl;
-        return;
-    }
-
-    vector<Video> videos;
-    string line;
-
-    while(getline(file, line)) {
-        stringstream ss(line);
-        string ignore, title, genre, duration, rating;
-        int movieRate;
-
-        if (getline(ss, ignore, ',') &&
-        getline(ss, title, ',') &&
-        getline(ss, duration, ',') &&
-        getline(ss, genre, ',') &&
-        getline(ss, rating, ',')) {
-
-            title = trim(title);
-            genre = trim(genre);
-            duration = trim(duration);
-            rating = trim(rating);
-
-            try {
-                movieRate = stoi(rating);
-                Video video(title, genre, duration, movieRate);
-                videos.push_back(video);
-            } catch (const invalid_argument &e) {
-                cout << "Error al convertir el rating a entero: " << title << endl;
-                continue;
-            }
-        } else {
-            cout << "Error al leer la línea: " << line << endl;
-            continue;
-        }
-    }
-    for (const Video &video : videos) {
-        cout << "Títle: " << video.getTitle() << endl;
-        cout << "Genre: " << video.getGenre() << endl;
-        cout << "Duration: " << video.getDuration() << endl;
-        cout << "Rating: " << video.getRating() << endl;
-        cout << "--------------------------------" << endl;
-    }
+void showMovieByRating(int rating){
+    Movies movieInstance;
+    movieInstance.showMovieByRating(moviesByRating, rating);
 }
 
 void home(){
+    int rating;
     string red = "\033[31m";
     string yellow = "\033[33m";
     string reset = "\033[0m";
@@ -93,21 +51,15 @@ void home(){
     int option;
     do {
         cout << red;
-        cout << "1. View the list of movies" << endl;
-        cout << "2. View the list of series" << endl;
-        cout << "3. Ratings of movies and series" << endl;
+        cout << "1. Show movie list" << endl;
+        cout << "2. Filter movies by rating" << endl;
+        cout << "3. Show series list" << endl;
         cout << "4. Rate a movie or series" << endl;
         cout << "0. Exit" << endl;
         cout << reset;
         cin >> option;
         switch (option) {
             case 1:
-                cout << "TEST" << endl;
-                break;
-            case 2:
-                cout << "TEST2" << endl;
-                break;
-            case 3:
                 cout << yellow << R"(
         ░▒▓██████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓████████▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓███████▓▒░▒▓████████▓▒░
         ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░
@@ -117,7 +69,16 @@ void home(){
         ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▓█▓▒░ ░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░  ░▒▓█▓▒░
         ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░   ░▒▓██▓▒░  ░▒▓█▓▒░▒▓████████▓▒░      ░▒▓████████▓▒░▒▓█▓▒░▒▓███████▓▒░   ░▒▓█▓▒░
                 )" << reset << endl;
-                showMoviesByRate();
+                showMovieList();
+                break;
+            case 2:
+                cout << "Choose a rating between 1 and 10: " << endl;
+                cin >> rating;
+                cout << "Movies with a rating of " << rating << " are: " << endl;
+                showMovieByRating(rating);
+                break;
+            case 3:
+                cout << "TEST3" << endl;
                 break;
             case 4:
                 cout << "TEST4" << endl;

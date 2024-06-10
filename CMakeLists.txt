@@ -14,4 +14,6 @@ add_executable(views_project
         src/Classes/Video.cpp
         src/Classes/Video.h
         src/main.cpp
-        holamellamotono.cpp)
+        src/Classes/Episodes.h
+        src/Classes/Episodes.cpp
+)

@@ -16,8 +16,6 @@ class Video {
         std::string getGenre() const;
         std::string getDuration() const;
         int getRating() const;
-        //std::vector<Video> showMovieByGenre(std::string genre, const std::vector<Video> &videos);
-        //static void showEpisodeBySeries(std::string title, const std::vector<Video> &videos);
 };
 
 # endif // VIDEO_H

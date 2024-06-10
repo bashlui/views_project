@@ -8,16 +8,10 @@ class Series : public Video {
 private:
     int numSeasons;
 public:
-    Series(int &id, std::string &title, std::string &genre, std::string &duration, float &rating, int &numSeasons)
-    : Video(id, title, genre, duration, rating), numSeasons(numSeasons) {}
-
-    void setVideoId() override;
-    void setVideoTitle() override;
-    void setVideoLength() override;
-    void setVideoGenre() override;
-    void setVideoRating() override;
-    double rateVideo() override;
-    void showSeries(std::vector<Series> &series);
+    Series();
+    Series(int&, std::string&, std::string&, std::string&, double&, int&);
+    virtual void setNumSeasons() = 0;
+    int getNumSeasons();
 };
 
 # endif SERIES_H

@@ -1,20 +1,31 @@
-20192345,Ad Astra,02:03,Drama,7
-20190750,The Platform,01:34,Drama,7
 20191580,Star Wars: The Rise of Skywalker,02:22,Acción,7
 20191245,The Lion King,01:58,Drama,7
-20200341,Onward,01:42,Acción,8
-20200450,Extraction,01:56,Drama,7
 20171580,Beauty and the Beast,02:09,Acción,7
 20141812,Guardians of the Galaxy,02:01,Acción,8
 20191234,The Irishman,03:30,Drama,8
-20152008,Un gallo con muchos huevos,01:38,Comedia,7
 20210512,Dune,02:35,Science Fiction,9
-20210634,No Time to Die,02:43,Action,8
-20210423,The French Dispatch,01:48,Comedy,7
 20210321,Black Widow,02:14,Action,7
 20210987,Free Guy,01:55,Comedy,8
-20211034,Shang-Chi and the Legend of the Ten Rings,02:12,Action,8
 20210865,The Suicide Squad,02:12,Action,7
-20210754,Space Jam: A New Legacy,01:55,Comedy,6
 20210123,Godzilla vs. Kong,01:53,Action,7
-20210234,A Quiet Place Part II,01:37,Thriller,8
+20180567,Avengers: Infinity War,02:29,Action,9
+20130547,The Wolf of Wall Street,03:00,Drama,8
+19990721,The Matrix,02:16,Science Fiction,10
+19940923,The Shawshank Redemption,02:22,Drama,10
+20140718,Interstellar,02:49,Science Fiction,9
+20091218,Avatar,02:42,Science Fiction,8
+19940324,Forrest Gump,02:22,Drama,9
+20170602,Wonder Woman,02:21,Action,7
+20010323,Shrek,01:30,Comedy,8
+19801113,The Shining,02:26,Horror,9
+19931001,Jurassic Park,02:07,Adventure,9
+20100219,Shutter Island,02:18,Thriller,8
+19950616,Batman Forever,02:01,Action,6
+20140516,Godzilla,02:03,Sci-Fi,6
+20131213,Frozen,01:42,Animation,8
+19951122,Toy Story,01:21,Animation,9
+19990709,American Pie,01:35,Comedy,7
+20101119,Harry Potter and the Deathly Hallows: Part 1,02:26,Fantasy,7
+20181214,Aquaman,02:23,Action,7
+20171122,The Greatest Showman,01:45,Musical,8
+
