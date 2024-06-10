@@ -6,8 +6,6 @@
 
 class Movies : public Video {
 private:
-    static void loadMovies(std::vector<Video> &videos);
-    static std::string trim(const std::string &str);
     std::string releaseDate;
 public:
     Movies();
@@ -15,6 +13,9 @@ public:
     std::string getMovieReleaseDate();
     virtual void showMovieList(std::vector<Video> &movies);
     virtual void showMovieByRating(std::vector<Video> &movies, int rating);
+    virtual void showMovieByGenre(std::vector<std::string> &genres ,std::vector<Video> &movies);
+    static void loadMovies(std::vector<Video> &videos);
+    static std::string trim(const std::string &str);
     void setMovieReleaseDate(std::string date);
 
 };

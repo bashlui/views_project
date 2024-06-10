@@ -3,10 +3,14 @@
 # include <iostream>
 # include <fstream>
 # include <sstream>
-#include <utility>
+# include <utility>
 # include <vector>
+# include <algorithm>
 
 using namespace std;
+
+string red = "\033[31m";
+string reset = "\033[0m";
 
 Movies::Movies() : Video() {
     releaseDate = "";
@@ -25,6 +29,7 @@ std::string Movies::getMovieReleaseDate() {
     return releaseDate;
 }
 
+// Trim leading and trailing spaces
 string Movies::trim(const string &str) {
     size_t first = str.find_first_not_of(' ');
     if (string::npos == first) {
@@ -34,6 +39,7 @@ string Movies::trim(const string &str) {
     return str.substr(first, (last - first + 1));
 }
 
+// Load movies from file
 void Movies::loadMovies(vector<Video> &videos) {
     ifstream file("Data/Peliculas.txt");
     if (!file.is_open()) {
@@ -70,6 +76,7 @@ void Movies::loadMovies(vector<Video> &videos) {
     file.close();
 }
 
+// Show movies list
 void Movies::showMovieList(vector<Video> &videos) {
     loadMovies(videos);
 
@@ -82,6 +89,7 @@ void Movies::showMovieList(vector<Video> &videos) {
     }
 }
 
+// Show movies by rating
 void Movies::showMovieByRating(vector<Video> &movies, int sRate) {
     loadMovies(movies);
 
@@ -89,6 +97,18 @@ void Movies::showMovieByRating(vector<Video> &movies, int sRate) {
         if (movie.getRating() == sRate) {
             cout << "Title: " << movie.getTitle() << endl;
             cout << "Genre: " << movie.getGenre() << endl;
+            cout << "Duration: " << movie.getDuration() << endl;
+            cout << "Rating: " << red << movie.getRating() << reset << endl;
+            cout << "--------------------------------" << endl;
+        }
+    }
+}
+
+void Movies::showMovieByGenre(vector<string> &genres, vector<Video> &movies) {
+    for (const auto &movie : movies) {
+        if (find(genres.begin(), genres.end(), movie.getGenre()) != genres.end()) {
+            cout << "Title: " << movie.getTitle() << endl;
+            cout << "Genre: " << red << movie.getGenre() << reset << endl;
             cout << "Duration: " << movie.getDuration() << endl;
             cout << "Rating: " << movie.getRating() << endl;
             cout << "--------------------------------" << endl;

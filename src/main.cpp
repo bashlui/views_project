@@ -18,6 +18,7 @@ using namespace std;
 
 vector<Video> movies;
 vector<Video> moviesByRating;
+vector<Video> moviesByGenre;
 
 void showMovieList() {
   Movies movieInstance;
@@ -29,8 +30,17 @@ void showMovieByRating(int rating){
     movieInstance.showMovieByRating(moviesByRating, rating);
 }
 
+void showMovieByGenres(vector<string> &genres){
+    Movies movieInstance;
+    movieInstance.showMovieByGenre(genres, movies);
+}
+
+
 void home(){
     int rating;
+    string genresStr;
+    string genre;
+    vector<string> genres;
     string red = "\033[31m";
     string yellow = "\033[33m";
     string reset = "\033[0m";
@@ -53,8 +63,9 @@ void home(){
         cout << red;
         cout << "1. Show movie list" << endl;
         cout << "2. Filter movies by rating" << endl;
-        cout << "3. Show series list" << endl;
-        cout << "4. Rate a movie or series" << endl;
+        cout << "3. Filter movies by genre" << endl;
+        cout << "4. Show series list" << endl;
+        cout << "5. Rate a movie or series" << endl;
         cout << "0. Exit" << endl;
         cout << reset;
         cin >> option;
@@ -78,7 +89,22 @@ void home(){
                 showMovieByRating(rating);
                 break;
             case 3:
-                cout << "TEST3" << endl;
+                cout << "List of genres: " << endl;
+                cout << "Acción | Drama | Science Fiction | Comedy | Horror "
+                        "| Adventure | Thriller | Sci-Fi | Animation | Fantasy | Musical" << endl;
+                cout << "Type the genre of the movies, separated by commas: " << endl;
+                cin.ignore();
+                genres.clear();
+                getline(cin, genresStr);
+                {
+                    stringstream ss(genresStr);
+                    while (getline(ss, genre, ',')) {
+                        genres.push_back(Movies::trim(genre));
+                    }
+                }
+                movies.clear();
+                Movies::loadMovies(movies);
+                showMovieByGenres(genres);
                 break;
             case 4:
                 cout << "TEST4" << endl;
@@ -102,6 +128,7 @@ void home(){
 }
 
 int main() {
+    Movies::loadMovies(movies);
     home();
     return 0;
 }
