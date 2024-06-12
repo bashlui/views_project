@@ -1,19 +1,11 @@
 #ifndef EPISODES_H
 #define EPISODES_H
 
-# include "Video.h"
+# include "Series.h"
 
-class Episodes : public Video {
-    private:
-        int seasonEpisode;
-        std::string airDate;
-    public:
-        Episodes();
-        Episodes(int&, std::string&, std::string&, std::string&, double&, int&, std::string&);
-        int getSeasonEpisode();
-        std::string getAirDate();
+class Episodes : public
 };
 
 
 
-#endif EPISODES_H
+#endif // EPISODES_H

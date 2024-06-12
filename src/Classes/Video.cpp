@@ -8,7 +8,7 @@ Video::Video(){
     title = "";
     genre = "";
     duration = "";
-    rating = 0.0;
+    rating = 0;
 }
 
 Video::Video(std::string &_title, std::string &_genre, std::string &_duration, int &_rating){
