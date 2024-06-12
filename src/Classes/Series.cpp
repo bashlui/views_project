@@ -12,12 +12,22 @@ string red2 = "\033[31m";
 string reset2 = "\033[0m";
 
 Series::Series() : Video2() {
+    idSeries = 0;
     numSeasons = 0;
 }
 
-Series::Series(std::string &_title, std::string &_genre, int &_numSeasons) :
-Video2(_title, _genre) {
+Series::Series(int& _id,std::string &_title, std::string &_genre, int &_numSeasons) :
+Video2(_id, _title, _genre) {
+    idSeries = _id;
     numSeasons = _numSeasons;
+}
+
+int Series::getSeriesId() const {
+    return idSeries;
+}
+
+void Series::setSeriesId(int id) {
+    idSeries = id;
 }
 
 void Series::setNumSeasons(int num) {
@@ -47,15 +57,16 @@ void Series::loadSeries(vector<Video2*> &series) {
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
-        string ignore, title, genre, seasons;
-        int numSeasons;
+        string id, title, genre, seasons;
+        int numSeasons, serieId;
 
-        if (getline(ss, ignore, ',') &&
+        if (getline(ss, id, ',') &&
             getline(ss, title, ',') &&
             getline(ss, genre, ',') &&
             getline(ss, seasons, ',')) {
+            serieId = stoi(id);
             numSeasons = stoi(seasons);
-            auto* serie = new Series(title, genre, numSeasons);
+            auto* serie = new Series(serieId, title, genre, numSeasons);
             series.push_back(serie);
 
         }
@@ -67,6 +78,7 @@ void Series::showSeriesList(vector<Video2*> &series) {
     for (const auto &serie : series) {
        Series *s = dynamic_cast<Series*>(serie);
        if (s) {
+           cout << "ID: " << s->getId2() << endl;
            cout << "Title: " << s->getTitle2() << endl;
            cout << "Genre: " << s->getGenre2() << endl;
            cout << "Number of seasons: " << s->getNumSeasons() << endl;
@@ -80,6 +92,7 @@ void Series::showSeriesByGenre(vector<string> &genres, vector<Video2*> &series) 
         if (find(genres.begin(), genres.end(), serie->getGenre2()) != genres.end()) {
             Series *s = dynamic_cast<Series*>(serie);
             if (s) {
+                cout << "ID: " << s->getId2() << endl;
                 cout << "Title: " << s->getTitle2() << endl;
                 cout << "Genre: " << red2 << s->getGenre2() << reset2 << endl;
                 cout << "Number of seasons: " << s->getNumSeasons() << endl;

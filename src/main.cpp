@@ -14,12 +14,14 @@
 # include "Classes/Video2.h"
 # include "Classes/Movies.h"
 # include "Classes/Series.h"
+# include "Classes/Episodes.h"
 
 using namespace std;
 
 vector<Video> movies;
 vector<Video> moviesByRating;
 vector<Video2*> series;
+vector<Video2*> episodes;
 
 void showMovieList() {
   Movies movieInstance;
@@ -46,7 +48,13 @@ void showMovieByGenres(vector<string> &genres){
     movieInstance.showMovieByGenre(genres, movies);
 }
 
+void showEpisodeBySeriesId(const string& id){
+    Episodes episodesInstance;
+    episodesInstance.showEpisodesListBySeriesId(episodes, id);
+}
+
 void home(){
+    string id;
     int rating;
     string genresStr;
     string genre;
@@ -76,7 +84,8 @@ void home(){
         cout << "3. Filter movies by genre" << endl;
         cout << "4. Show series list" << endl;
         cout << "5. Filter series by genre" << endl;
-        cout << "6. Rate a movie or series" << endl;
+        cout << "6. Show episodes of a series" << endl;
+        cout << "7. Rate a movie or series" << endl;
         cout << "0. Exit" << endl;
         cout << reset;
         cin >> option;
@@ -146,6 +155,13 @@ void home(){
                 series.clear();
                 Series::loadSeries(series);
                 showSeriesByGenres(genres);
+                break;
+            case 6:
+                cout << "Type the series ID: " << endl;
+                cin >> id;
+                episodes.clear();
+                Episodes::loadEpisodes(episodes);
+                showEpisodeBySeriesId(id);
                 break;
             case 0:
                 cout << yellow << R"(

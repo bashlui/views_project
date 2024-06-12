@@ -5,12 +5,14 @@
 
 class Video2 {
 protected:
+    int id;
     std::string title;
     std::string genre;
 public:
     Video2();
     virtual ~Video2();
-    Video2(std::string&, std::string&);
+    Video2(int&, std::string&, std::string&);
+    int getId2() const;
     std::string getTitle2() const;
     std::string getGenre2() const;
 };
