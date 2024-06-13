@@ -5,7 +5,7 @@ Here are the instructions to run it on Replit or your local machine.
 
 ## Replit execution
 
-In the Shell, use the following commands to execute the code.
+In the [Replit](https://replit.com/@codewithlui/viewsproject?v=1) Shell, use the following commands to execute the code.
 
 ```bash
 cd src
