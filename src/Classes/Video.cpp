@@ -34,4 +34,7 @@ int Video::getRating() const{
     return rating;
 }
 
+void Video::setRating(int &rate){
+    rating = rate;
+}
 

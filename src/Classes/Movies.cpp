@@ -14,20 +14,31 @@ string reset = "\033[0m";
 
 Movies::Movies() : Video() {
     releaseDate = "";
+    movieRating = 0;
 }
 
 Movies::Movies(std::string &_title, std::string &_genre, std::string &_duration, int &_rating, std::string &_releaseDate)
 : Video(_title, _genre, _duration, _rating) {
     releaseDate = _releaseDate;
+    movieRating = 0;
 }
 
 void Movies::setMovieReleaseDate(std::string date) {
     releaseDate = std::move(date);
 }
 
+void Movies::setMovieRating(int rating) {
+    movieRating = rating;
+}
+
 std::string Movies::getMovieReleaseDate() {
     return releaseDate;
 }
+
+int Movies::getMovieUserRating() const {
+    return movieRating;
+}
+
 
 // Trim leading and trailing spaces
 string Movies::trim(const string &str) {
@@ -114,4 +125,15 @@ void Movies::showMovieByGenre(vector<string> &genres, vector<Video> &movies) {
             cout << "--------------------------------" << endl;
         }
     }
+}
+
+void Movies::rateMovie(vector<Video> &movies, const string& title, int &rate) {
+    for (auto &movie : movies) {
+        if (movie.getTitle() == title) {
+            movie.setRating(rate);
+            cout << "Rating for " << movie.getTitle() << " has been updated to " << rate << endl;
+            return;
+        }
+    }
+    cout << "Movie not found" << endl;
 }

@@ -1,14 +1,11 @@
 /*
-    Project: Views - Plataforma de streaming de videos
+    Project: Views - Streaming Platform
     Created by: Luis Antonio Bolaina Domínguez, Freda Nicole Blanco
-
 */
 
 # include <iostream>
 # include <vector>
 # include <string>
-# include <algorithm>
-# include <fstream>
 # include <sstream>
 # include "Classes/Video.h"
 # include "Classes/Video2.h"
@@ -21,7 +18,7 @@ using namespace std;
 vector<Video> movies;
 vector<Video> moviesByRating;
 vector<Video2*> series;
-vector<Video2*> episodes;
+vector<Episodes *> episodes;
 
 void showMovieList() {
   Movies movieInstance;
@@ -48,13 +45,19 @@ void showMovieByGenres(vector<string> &genres){
     movieInstance.showMovieByGenre(genres, movies);
 }
 
-void showEpisodeBySeriesId(const string& id){
-    Episodes episodesInstance;
-    episodesInstance.showEpisodesListBySeriesId(episodes, id);
+void rateMovie(const string &title, int rate){
+    Movies movieInstance;
+    movieInstance.rateMovie(movies, title, rate);
+}
+
+void showEpisodeBySeriesId(int id){
+    Episodes episodeInstance;
+    episodeInstance.showEpisodesListBySeriesId(episodes, id);
 }
 
 void home(){
-    string id;
+    string title;
+    int id;
     int rating;
     string genresStr;
     string genre;
@@ -85,7 +88,7 @@ void home(){
         cout << "4. Show series list" << endl;
         cout << "5. Filter series by genre" << endl;
         cout << "6. Show episodes of a series" << endl;
-        cout << "7. Rate a movie or series" << endl;
+        cout << "7. Rate a video" << endl;
         cout << "0. Exit" << endl;
         cout << reset;
         cin >> option;
@@ -157,11 +160,21 @@ void home(){
                 showSeriesByGenres(genres);
                 break;
             case 6:
-                cout << "Type the series ID: " << endl;
+                cout << "Type the series ID: ";
                 cin >> id;
                 episodes.clear();
                 Episodes::loadEpisodes(episodes);
                 showEpisodeBySeriesId(id);
+                break;
+            case 7:
+                cout << "What movie do you want to rate? ";
+                cin.ignore();
+                getline(cin, title);
+                cout << "What rating do you want to give it (1-10)?: ";
+                cin >> rating;
+                movies.clear();
+                Movies::loadMovies(movies);
+                rateMovie(title, rating);
                 break;
             case 0:
                 cout << yellow << R"(

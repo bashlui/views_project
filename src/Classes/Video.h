@@ -16,6 +16,7 @@ class Video {
         std::string getGenre() const;
         std::string getDuration() const;
         int getRating() const;
+        void setRating(int &rate);
 };
 
 # endif // VIDEO_H

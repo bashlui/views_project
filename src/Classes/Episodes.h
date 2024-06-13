@@ -5,24 +5,27 @@
 # include <string>
 # include "Series.h"
 
-class Episodes : public Series {
+class Episodes {
 private:
-    // id, title, genre X, idSeries, numSeasons X
-    // EPISODIO: id, titulo, duración, rating, numero de temporada
+    int episodeID;
+    std::string episodeIdSeason;
+    std::string episodeTitle;
     std::string episodeDuration;
-    int episodeSeason;
+    float episodeRating;
+    int episodeSeasonNumber;
 public:
     Episodes();
-    ~Episodes() override;
-    Episodes(int&, std::string&, std::string&, int&, int&, std::string&, int&);
-    std::string getEpisodeDuration() const;
+    Episodes(int, std::string, std::string, std::string, float, int);
+    ~Episodes();
+    int getEpisodeId() const;
+    std::string getEpisodeIdSeason();
+    std::string getEpisodeTitle();
+    std::string getEpisodeDuration();
+    float getEpisodeRating() const;
     int getEpisodeSeason() const;
-    void setEpisodeDuration(std::string duration);
-    void setEpisodeSeason(int season);
-    virtual void showEpisodesListBySeriesId(std::vector<Video2*> &episodes, const std::string &id);
-    static void loadEpisodes(std::vector<Video2*> &episodes);
     static std::string trim(const std::string &str);
-
+    virtual void showEpisodesListBySeriesId(std::vector<Episodes *> &episodes, int &id);
+    static void loadEpisodes(std::vector<Episodes *> &episodes);
 };
 
 #endif // EPISODES_H
