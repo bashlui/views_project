@@ -12,6 +12,8 @@ cd src
 g++ main.cpp ./Classes/Movies.cpp ./Classes/Video.cpp ./Classes/Series.cpp ./Classes/Video2.cpp ./Classes/Episodes.cpp
 ./test
 ```
+
+When executing the code, i recommend that the Shell window is on full screen.
 ## Installing in your own machine
 
 To install it in your own machine, you have to install [Git](https://www.git-scm.com/downloads) in your own machine, then you check your directory and execute:
