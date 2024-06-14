@@ -3,6 +3,9 @@
 In this repository, we developed the code for the final project for OOP Class.
 Here are the instructions to run it on Replit or your local machine.
 
+![image](https://github.com/bashlui/views_project/assets/134757904/a3837fd8-c96e-4649-af51-9c17d087913d)
+
+
 ## Replit execution
 
 In the [Replit](https://replit.com/join/ebuqvcchbl-codewithlui) Shell, use the following commands to execute the code.
